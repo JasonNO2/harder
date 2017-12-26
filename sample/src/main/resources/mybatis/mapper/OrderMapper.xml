@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.jason.mapper.OrderMapper">
+    <sql id="orderColumn">
+        billid,total,maker
+    </sql>
+    <sql id="order_detailColumn">
+        billid,goodid,goodname,goodprice,quantity
+    </sql>
+    <select id="findAll" resultType="Order">
+        SELECT <include refid="orderColumn"></include> FROM `ORDER`
+    </select>
+    <select id="findAlld" resultType="Order_detail" parameterType="String">
+        SELECT <include refid="order_detailColumn"></include> FROM ORDER_detail WHERE billid=${billid}
+    </select>
+    <insert id="addOrder" parameterType="Order">
+        insert into `order`(<include refid="orderColumn"></include>) values (#{order.billid},#{order.total},#{order.maker})
+    </insert>
+    <insert id="addOrderd" parameterType="Order_detail">
+        INSERT INTO order_detail(<include refid="order_detailColumn"></include>) VALUES (#{order_detail.billid},#{order_detail.goodid},#{order_detail.goodname},#{order_detail.goodprice},#{order_detail.quantity})
+    </insert>
+</mapper>

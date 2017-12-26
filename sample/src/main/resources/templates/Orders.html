@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Orders</title>
+    <script src="/Jquery/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/bootstrap.css"/>
+    <script src="/bootstrap/bootstrap.js"></script>
+    <script src="/bootstrap/bootstrap-table.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/bootstrap-table.css"/>
+    <script src="/Vue2/vue.js"></script>
+</head>
+<body>
+    <table id="tb_orders">
+        <thead>
+            <tr>
+                <th data-aligh="center" data-field="billid">
+                    订单号
+                </th>
+                <th data-aligh="center" data-field="total">
+                    总价
+                </th>
+                <th data-aligh="center" data-field="maker">
+                    制单人
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+<script>
+    $("#tb_orders").bootstrapTable({
+        url:'all',
+        detailView : true,
+        onExpandRow : function(index, row, $detail) {
+            InitSubTable(index, row, $detail);
+        }
+    });
+    function InitSubTable(index, row, $detail) {
+        var cur_table = $detail.html('<table></table>').find('table');
+        var id = row.billid;
+        $(cur_table).bootstrapTable({
+            url:'alld/'+id,
+            columns : [{
+                field : 'goodid',
+                title : '商品编号',
+                align : 'center'
+            },{
+                field : 'goodname',
+                title : '商品名称',
+                align : 'center'
+            },{
+                field : 'goodprice',
+                title : '商品价格',
+                align : 'center'
+            },{
+                field : 'quantity',
+                title : '数量',
+                align : 'center'
+            }],
+        });
+    };
+</script>
+</html>

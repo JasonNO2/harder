@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Thymeleaf</title>
+    <script src="/Jquery/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/bootstrap.css"/>
+    <script src="/bootstrap/bootstrap.js"></script>
+    <script src="/Vue2/vue.js"></script>
+</head>
+<body>
+    <h1>Hello</h1>
+    <p th:text="${name}" style="color: cadetblue"></p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>name</td>
+                <td>age</td>
+                <td>birthday</td>
+                <td>hobby</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="p : ${people}">
+                <td th:text="${p.name}"></td>
+                <td th:text="${p.age}"></td>
+                <td th:text="${p.birthday}"></td>
+                <td th:text="${p.hobby}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
