@@ -1,0 +1,8 @@
+#
+#Wed Dec 27 20:07:11 CST 2017
+/bootstrap/bootstrap.css=2
+/Vue2/vue.js=2
+/favicon.ico=2
+/bootstrap/bootstrap.js=2
+/Jquery/jquery-3.2.1.min.js=2
+/people/findAll=2
