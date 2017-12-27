@@ -1,4 +1,4 @@
-package ceshi;
+package ceshi.WaitAndSleep;
 
 import java.util.ArrayList;
 import java.util.List;

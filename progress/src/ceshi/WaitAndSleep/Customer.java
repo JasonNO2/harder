@@ -1,4 +1,4 @@
-package ceshi;
+package ceshi.WaitAndSleep;
 
 /*
 * 消费者

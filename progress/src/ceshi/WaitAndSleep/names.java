@@ -1,4 +1,4 @@
-package ceshi;
+package ceshi.WaitAndSleep;
 
 import java.io.*;
 import java.util.Comparator;
@@ -10,7 +10,7 @@ public class names {
     public static void main (String[] args) throws IOException {
         //获取资源且生成字节流
         //names.class.getResourceAsStream("src/ceshi/names.txt");
-        File f = new File("src/ceshi/names.txt");
+        File f = new File("src/ceshi/WaitAndSleep/names.txt");
         TreeMap<String, Integer> namesMap = new TreeMap<>(new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
