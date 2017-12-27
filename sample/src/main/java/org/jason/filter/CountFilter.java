@@ -51,23 +51,27 @@ public class CountFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         final String uri=req.getRequestURI();
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                String value = downloadLog.getProperty(uri);
-                if (value == null) {
-                    downloadLog.setProperty(uri, "1");
-                } else {
-                    int count = Integer.parseInt(value);
-                   downloadLog.setProperty(uri, String.valueOf(++count));
+        final int lastDocIndex = uri.lastIndexOf(".");
+        boolean flag=lastDocIndex==-1?false:true;
+        if (flag) {
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    String value = downloadLog.getProperty(uri);
+                    if (value == null) {
+                        downloadLog.setProperty(uri, "1");
+                    } else {
+                        int count = Integer.parseInt(value);
+                        downloadLog.setProperty(uri, String.valueOf(++count));
+                    }
+                    try {
+                        downloadLog.store(new FileWriter(logFile), "");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-                try {
-                    downloadLog.store(new FileWriter(logFile), "");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+            });
+        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
